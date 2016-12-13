@@ -1,6 +1,6 @@
 # PhoneticContacts
 
-![Language](https://img.shields.io/badge/Language-Swift%202-orange.svg)
+![Language](https://img.shields.io/badge/Language-Swift3-orange.svg)
 [![Git](https://img.shields.io/badge/GitHub-lexrus-blue.svg?style=flat)](https://github.com/lexrus)
 [![Twitter](https://img.shields.io/badge/Twitter-@lexrus-blue.svg?style=flat)](http://twitter.com/lexrus)
 
