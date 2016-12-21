@@ -10,7 +10,6 @@ import Foundation
 import AddressBook
 
 extension String {
-
     func upcaseInitial() -> String {
         var chars = characters
         if let firstChar = chars.popFirst().map({ String($0) }) {
@@ -38,6 +37,14 @@ extension String {
     }
 
     func phoneticLast() -> String {
+        let CompoundSurnName: [String:String] = [
+            "单于": "chanyu",
+            "尉迟": "yuchi",
+            "长孙": "zhangsun",
+            "中行": "zhonghang",
+            "万俟": "moqi"
+        ]
+
         let SpecialLastName: [String: String] = [
             "柏": "bai",
             "鲍": "bao",
@@ -97,17 +104,31 @@ extension String {
             "禚": "zhuo",
             "迮": "ze",
             "沈": "shen",
-            "沉": "shen",
-            "尉迟": "yuchi",
-            "长孙": "zhangsun",
-            "中行": "zhonghang",
-            "万俟": "moqi",
-            "单于": "chanyu"
+            "沉": "shen"
         ]
 
-        if let specialLastName = SpecialLastName[self] {
-            return specialLastName.upcaseInitial()
+        if ( self.characters.count == 1 ){
+            if let specialLastName = SpecialLastName[self] {
+                return specialLastName.upcaseInitial()
+            }
+        }else{
+            /* check first charecter for special lastname */
+            let lastName = String(self[self.startIndex])
+            if let specialLastName = SpecialLastName[lastName] {
+                let upcase = specialLastName.upcaseInitial()
+                let index = self.index(self.startIndex,offsetBy:1)
+                return upcase+self.substring(from:index)
+            }
+            
+            /* check first 2 charecter for compound surn name */
+            let index2 = self.index( self.startIndex, offsetBy:2 )
+            let compoundSurnName = self.substring(to: index2 )
+            if let specialLastName = CompoundSurnName[compoundSurnName] {
+                let upcase = specialLastName.upcaseInitial()
+                return upcase+self.substring(from:index2)
+            }
         }
+
         return self
     }
 
